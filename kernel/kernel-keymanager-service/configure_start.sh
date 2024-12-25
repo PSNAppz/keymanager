@@ -3,6 +3,10 @@
 #installs the pkcs11 libraries.
 set -e
 
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+sudo apt-get update
+sudo apt-get install libc6-dev=2.34-0ubuntu0.21.10.1 -y 
+
 DEFAULT_ZIP_PATH=artifactory/libs-release-local/hsm/client.zip
 [ -z "$hsm_zip_file_path" ] && zip_path="$DEFAULT_ZIP_PATH" || zip_path="$hsm_zip_file_path"
 

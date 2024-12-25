@@ -3,8 +3,6 @@
 #installs the pkcs11 libraries.
 set -e
 
-apt install libc6 -y
-
 DEFAULT_ZIP_PATH=artifactory/libs-release-local/hsm/client.zip
 [ -z "$hsm_zip_file_path" ] && zip_path="$DEFAULT_ZIP_PATH" || zip_path="$hsm_zip_file_path"
 

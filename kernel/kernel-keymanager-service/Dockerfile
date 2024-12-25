@@ -78,13 +78,13 @@ ENV hsm_local_dir_name=${hsm_local_dir}
 # install packages and create user
 RUN apt-get -y update \
 && apt-get install -y unzip sudo\
-&& add-apt-repository ppa:ubuntu-toolchain-r/test -y\
-&& apt-get update\
-&& apt-get install libc6-dev -y\
 && groupadd -g ${container_user_gid} ${container_user_group} \
 && useradd -u ${container_user_uid} -g ${container_user_group} -s /bin/sh -m ${container_user} \
 && adduser ${container_user} sudo \
-&& echo "%sudo ALL=(ALL) NOPASSWD:/home/${container_user}/${hsm_local_dir}/install.sh" >> /etc/sudoers
+&& echo "%sudo ALL=(ALL) NOPASSWD:/home/${container_user}/${hsm_local_dir}/install.sh" >> /etc/sudoers \
+&& sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y\
+&& apt-get -y update\
+&& apt-get install libc6-dev -y 
 
 # set working directory for the user
 WORKDIR /home/${container_user}

@@ -65,6 +65,7 @@ RUN apt-get update \
     sudo \
     wget \
     curl \
+    git \
     software-properties-common \
     openjdk-11-jdk \
     && groupadd -g ${container_user_gid} ${container_user_group} \

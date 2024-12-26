@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.02
 
 ARG SOURCE
 ARG COMMIT_HASH

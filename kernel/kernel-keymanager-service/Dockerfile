@@ -58,12 +58,13 @@ ARG container_user_gid=1001
 ARG hsm_local_dir=hsm-client
 ENV hsm_local_dir_name=${hsm_local_dir}
 
-# Install packages, create user, and install OpenJDK 11
+# Install packages, create user, and install OpenJDK 11 and curl
 RUN apt-get update \
     && apt-get install -y \
     unzip \
     sudo \
     wget \
+    curl \
     software-properties-common \
     openjdk-11-jdk \
     && groupadd -g ${container_user_gid} ${container_user_group} \

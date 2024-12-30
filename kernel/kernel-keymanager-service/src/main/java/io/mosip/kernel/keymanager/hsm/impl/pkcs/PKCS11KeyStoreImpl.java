@@ -516,9 +516,15 @@ public class PKCS11KeyStoreImpl implements io.mosip.kernel.core.keymanager.spi.K
 
 	private KeyPair generateKeyPair() {
 		try {
+			LOGGER.debug("Assymetric Key Algorithm -- {}",asymmetricKeyAlgorithm);
+			LOGGER.debug("Provider is {}",provider.getClass().getName());
+			
 			KeyPairGenerator generator = KeyPairGenerator.getInstance(asymmetricKeyAlgorithm, provider);
+			LOGGER.debug("Generator is ...{}",generator.getClass().getName());
+			
 			SecureRandom random = new SecureRandom();
 			generator.initialize(asymmetricKeyLength, random);
+			LOGGER.debug("After generator initialize");
 			return generator.generateKeyPair();
 		} catch (java.security.NoSuchAlgorithmException e) {
 			throw new io.mosip.kernel.core.exception.NoSuchAlgorithmException(

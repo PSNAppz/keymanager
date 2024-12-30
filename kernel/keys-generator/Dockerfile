@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM ubuntu:22.04
 
 ARG SOURCE
 ARG COMMIT_HASH
@@ -11,7 +11,14 @@ LABEL build_time=${BUILD_TIME}
 
 RUN apt-get update \
     && apt-get -y upgrade \
-    && apt-get -y install unzip
+    && apt-get -y install \
+    unzip \
+    software-properties-common \
+    openjdk-11-jdk \
+    && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y \
+    && apt-get update \
+    && apt-get install -y libc6-dev \
+    && apt-get clean
 
 # can be passed during Docker build as build time environment for github branch to pickup configuration from.
 ARG spring_config_label

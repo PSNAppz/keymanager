@@ -13,6 +13,9 @@ RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get -y install \
     unzip \
+    sudo \
+    wget \
+    curl \
     software-properties-common \
     openjdk-11-jdk \
     && sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y \

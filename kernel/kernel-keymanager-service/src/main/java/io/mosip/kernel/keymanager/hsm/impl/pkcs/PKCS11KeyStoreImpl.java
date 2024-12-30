@@ -167,6 +167,9 @@ public class PKCS11KeyStoreImpl implements io.mosip.kernel.core.keymanager.spi.K
 	private synchronized Provider setupProvider(String configPath) {
 		
 		try {
+			LOGGER.debug("PSN PSN PSN PSN");
+			LOGGER.debug("CONFIG PATH -- FOR SUNPKCS11 is {}",configPath);
+			LOGGER.debug("PROVIDER NAME {}",KeymanagerConstant.SUN_PKCS11_PROVIDER);
 			Provider sunPKCS11Provider = Security.getProvider(KeymanagerConstant.SUN_PKCS11_PROVIDER);
 			if(sunPKCS11Provider == null)
 				throw new ProviderException("SunPKCS11 provider not found");

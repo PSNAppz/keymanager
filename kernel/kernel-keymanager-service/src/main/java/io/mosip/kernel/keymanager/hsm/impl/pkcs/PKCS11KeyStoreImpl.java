@@ -167,6 +167,9 @@ public class PKCS11KeyStoreImpl implements io.mosip.kernel.core.keymanager.spi.K
 	private synchronized Provider setupProvider(String configPath) {
 		
 		try {
+			LOGGER.debug("PSN PSN PSN PSN");
+			LOGGER.debug("CONFIG PATH -- FOR SUNPKCS11 is {}",configPath);
+			LOGGER.debug("PROVIDER NAME {}",KeymanagerConstant.SUN_PKCS11_PROVIDER);
 			Provider sunPKCS11Provider = Security.getProvider(KeymanagerConstant.SUN_PKCS11_PROVIDER);
 			if(sunPKCS11Provider == null)
 				throw new ProviderException("SunPKCS11 provider not found");
@@ -516,9 +519,13 @@ public class PKCS11KeyStoreImpl implements io.mosip.kernel.core.keymanager.spi.K
 
 	private KeyPair generateKeyPair() {
 		try {
+			LOGGER.debug("Assymetric Key Algorithm -- {}",asymmetricKeyAlgorithm);
+			LOGGER.debug("Provider is {}",provider.getClass().getName());
 			KeyPairGenerator generator = KeyPairGenerator.getInstance(asymmetricKeyAlgorithm, provider);
+			LOGGER.debug("Generator is ...{}",generator.getClass().getName());
 			SecureRandom random = new SecureRandom();
 			generator.initialize(asymmetricKeyLength, random);
+			LOGGER.debug("After generator initialize");
 			return generator.generateKeyPair();
 		} catch (java.security.NoSuchAlgorithmException e) {
 			throw new io.mosip.kernel.core.exception.NoSuchAlgorithmException(

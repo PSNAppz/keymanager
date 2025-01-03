@@ -524,7 +524,8 @@ public class PKCS11KeyStoreImpl implements io.mosip.kernel.core.keymanager.spi.K
 		      KeyPairGenerator generator = null;
 		            
 		      try{
-		         generator = KeyPairGenerator.getInstance(asymmetricKeyAlgorithm, provider);    
+		        // generator = KeyPairGenerator.getInstance(asymmetricKeyAlgorithm, provider);    
+			generator = new org.bouncycastle.jcajce.provider.asymmetric.rsa.KeyPairGeneratorSpi();
 		      } catch (Exception ex) {
 		         LOGGER.debug("EXCEPTION Stack Trace is {}",ex.getStackTrace());
 		         LOGGER.debug("Exception Message is {}",ex.getMessage());

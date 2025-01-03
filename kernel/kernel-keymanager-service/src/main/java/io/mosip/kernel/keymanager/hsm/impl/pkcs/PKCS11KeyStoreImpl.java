@@ -518,22 +518,32 @@ public class PKCS11KeyStoreImpl implements io.mosip.kernel.core.keymanager.spi.K
 	}
 
 	private KeyPair generateKeyPair() {
-		try {
-			LOGGER.debug("Assymetric Key Algorithm -- {}",asymmetricKeyAlgorithm);
-			LOGGER.debug("Provider is {}",provider.getClass().getName());
-			
-			KeyPairGenerator generator = KeyPairGenerator.getInstance(asymmetricKeyAlgorithm, provider);
-			LOGGER.debug("Generator is ...{}",generator.getClass().getName());
-			
-			SecureRandom random = new SecureRandom();
-			generator.initialize(asymmetricKeyLength, random);
-			LOGGER.debug("After generator initialize");
-			return generator.generateKeyPair();
-		} catch (java.security.NoSuchAlgorithmException e) {
-			throw new io.mosip.kernel.core.exception.NoSuchAlgorithmException(
-					KeyGeneratorExceptionConstant.MOSIP_NO_SUCH_ALGORITHM_EXCEPTION.getErrorCode(),
-					KeyGeneratorExceptionConstant.MOSIP_NO_SUCH_ALGORITHM_EXCEPTION.getErrorMessage(), e);
-		}
+		   try {
+		      LOGGER.debug("PSN GENERATE KEY PAIR");
+		      LOGGER.debug("Assymetric Key Algorithm -- {}",asymmetricKeyAlgorithm);
+		      LOGGER.debug("Provider is {}",provider.getClass().getName());
+		      KeyPairGenerator generator = null;
+		            
+		      try{
+		         generator = KeyPairGenerator.getInstance(asymmetricKeyAlgorithm, provider);    
+		      } catch (Exception ex) {
+		         LOGGER.debug("EXCEPTION Stack Trace is {}",ex.getStackTrace());
+		         LOGGER.debug("Exception Message is {}",ex.getMessage());
+		         LOGGER.debug("Exception TO STRING {}",ex.toString());
+		      }
+		      
+		
+		      LOGGER.debug("Generator is ...{}",generator.getClass().getName());
+		      SecureRandom random = new SecureRandom();
+		      generator.initialize(asymmetricKeyLength, random);
+		      LOGGER.debug("After generator initialize");
+		      return generator.generateKeyPair();
+		
+		   } catch (Exception e) {
+		      throw new io.mosip.kernel.core.exception.NoSuchAlgorithmException(
+		            KeyGeneratorExceptionConstant.MOSIP_NO_SUCH_ALGORITHM_EXCEPTION.getErrorCode(),
+		            KeyGeneratorExceptionConstant.MOSIP_NO_SUCH_ALGORITHM_EXCEPTION.getErrorMessage(), e);
+		   }
 	}
 
 	private SecretKey generateSymmetricKey() {
